@@ -1,0 +1,62 @@
+<section class="add">
+    <div fxlayout="column">
+        <button mat-fab color="accent" (click)="cancel()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </div>
+    <fieldset>
+        <legend>Add Task</legend>
+
+        <form [formGroup]="formGroup" fxLayout="column" fxFlex="40%" (ngSubmit)="saveList()">
+            <div>
+                <mat-form-field>
+                    <input matInput formControlName="name" placeholder="Name">
+                </mat-form-field>
+            </div>
+            <div *ngIf="name.invalid && name.touched">
+                <div *ngIf="name.errors.required">
+                    <span class="errors">name is required</span>
+                </div>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email">
+                </mat-form-field>
+            </div>
+            <div *ngIf="email.invalid && email.touched">
+                <div *ngIf="email.errors.required">
+                        <span class="errors"> email is required </span>
+                </div>
+            </div>
+            <br>
+            <div>
+                <mat-form-field>
+                    <input matInput formControlName="mobileNo" placeholder="MobileNo" minlength="10" onkeypress="if(this.value.length==10) return false;return event.charCode >= 48 && event.charCode <= 57 ||event.charCode == '.' || event.charCode == 250">
+                </mat-form-field>
+            </div>
+            <div *ngIf="mobileNo.invalid && mobileNo.touched">
+                <div *ngIf="mobileNo.errors.required">
+                        <span class="errors"> mobileNo is required </span>
+                </div>
+            </div>
+            <br>
+            <div>
+                <mat-radio-group aria-label="Select an option" formControlName="gender">
+                    <mat-radio-button value="Male">Male</mat-radio-button>
+                    <mat-radio-button value="Female">Female</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div *ngIf="gender.invalid && gender.touched">
+                <div *ngIf="gender.errors.required">
+                        <span class="errors"> gender is required </span>
+                </div>
+            </div>
+            <br>
+            <div fxLayout="row">
+                <button mat-raised-button color="primary" [disabled]="!formGroup.valid">
+                    Save
+                </button>
+            </div>
+        </form>
+    </fieldset>
+</section>

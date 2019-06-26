@@ -1,0 +1,69 @@
+<section class="todo">
+   
+    <!--  show todo list div -->
+    <div *ngIf="!isAddCall">
+        <fieldset>
+            <legend>Add Task</legend>
+            <div fxlayout="column">
+                <button mat-fab color="accent" (click)="addToList()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </fieldset>
+        <div>
+            <mat-table #table [dataSource]="dataSource">
+                <ng-container matColumnDef="sequence">
+                    <mat-header-cell *matHeaderCellDef>Sequence</mat-header-cell>
+                    <mat-cell *matCellDef="let student; let i = index;">{{i+1}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                    <mat-cell *matCellDef="let student">{{student.name}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                    <mat-cell *matCellDef="let student">{{student.email}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="mobileNo">
+                    <mat-header-cell *matHeaderCellDef>MobileNo</mat-header-cell>
+                    <mat-cell *matCellDef="let student">{{student.mobileNo}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="gender">
+                    <mat-header-cell *matHeaderCellDef>Gender</mat-header-cell>
+                    <mat-cell *matCellDef="let student">{{student.gender}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="reviews">
+                    <mat-header-cell *matHeaderCellDef>Reviews</mat-header-cell>
+                    <mat-cell *matCellDef="let student">  <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>{{student.reviews}}</mat-cell>
+                   
+                </ng-container>
+              
+
+                <!-- row action Column -->
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                    <mat-cell *matCellDef="let student; let i = index;">
+                        <button mat-button color="primary" (click)="editList(i, student)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-button color="warn" (click)="deleteById(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns; let i = index;"></mat-row>
+            </mat-table>
+        </div>
+    </div>
+
+    <!-- add todo list div -->
+    <div *ngIf="isAddCall">
+        <app-todo-add (change)="viewAction($event)" [taskToEdit]="taskToEdit"></app-todo-add>
+    </div>
+</section>

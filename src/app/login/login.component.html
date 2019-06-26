@@ -1,0 +1,28 @@
+<div class="flex-container">
+  <mat-card class="example-card">
+    <h1 class="title">Login</h1>
+    <form class="example-form" [formGroup]="loginForm">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+      <div *ngIf="email?.invalid && email.touched">
+        <div *ngIf="email.errors.required">
+          <span class="errors"> email is required </span>
+        </div>
+      </div>
+      <br />
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Password" formControlName="password">
+      </mat-form-field>
+      <div *ngIf="password?.invalid && password.touched">
+        <div *ngIf="password.errors.required">
+          <span class="errors"> password is required </span>
+        </div>
+      </div>
+    </form>
+
+    <mat-card-actions>
+      <button mat-raised-button color="accent" (click)="login()">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

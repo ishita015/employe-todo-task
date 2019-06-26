@@ -1,0 +1,8 @@
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+    min-width: 0px !important;
+    line-height: 0px !important;
+    padding: 0 10px !important;
+}
+.mat-header-cell {
+    font-size: 16px !important;
+}
